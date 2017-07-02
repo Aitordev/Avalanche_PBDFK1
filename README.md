@@ -47,19 +47,19 @@ Statistical measures and histograms obtained with Matlab and available in 'crypt
 
 |                         | **PBDKF1 Test1** | **PBDKF1 Test2** | **PBDKF1 Test3** | **Ramdon Func.** |
 | :---------------------- | ---------------: | ---------------: | ---------------: | ---------------: |
-| **Media**               | 80.0080          | 79.9939          | 80.0034          | 80.0002          |
-| **Mediana**             | 80               | 80               | 80               | 80               |
-| **Moda**                | 80               | 80               | 80               | 80               |
-| **Varianza**            | 40.0587          | 40.0855          | 39.9810          | 40.0535          |
-| **Desviacion Estandar** | 6.3292           | 6.3313           | 6.3231           | 6.3288           |
-| **Error Estandar**      | 0.0063           | 0.0063           | 0.0063           | 0.0063           |
+| **Average**             | 80.0080          | 79.9939          | 80.0034          | 80.0002          |
+| **Median**              | 80               | 80               | 80               | 80               |
+| **Mode**                | 80               | 80               | 80               | 80               |
+| **Variance**            | 40.0587          | 40.0855          | 39.9810          | 40.0535          |
+| **Standard Desviation** | 6.3292           | 6.3313           | 6.3231           | 6.3288           |
+| **Standard Error**      | 0.0063           | 0.0063           | 0.0063           | 0.0063           |
 | **Skewness**            | -7.2674e-04      | 0.0012           | -0.0048          | 0.0030           |
 | **Kurtosis**            | 2.9872           | 2.9869           | 2.9864           | 2.9896           |
-| **Rango**               | 59               | 58               | 66               | 59               |
-| **Maximo**              | 111              | 109              | 114              | 110              |     
-| **Minimo**              | 52               | 51               | 51               | 51               |
+| **Range**               | 59               | 58               | 66               | 59               |
+| **Max**                 | 111              | 109              | 114              | 110              |     
+| **Min**                 | 52               | 51               | 51               | 51               |
 | **Sum**                 | 80007962         | 79993924         | 80003366         | 80000159         |
-| **Chi Cuadrado**        | 0.3334           | 0.3335           | 0.3333            
+| **χ²**                  | 0.3334           | 0.3335           | 0.3333            
  
 
 As we can see once obtained all the data we have distributions symmetrical, normal and univariate in all cases.
@@ -73,7 +73,7 @@ In the histograms the difference between the algorithm and a random function is 
 - Documentation of the algorithm and its parameters within the Api. 
 [*https://www.dlitz.net/software/pycrypto/api/current/Crypto.Protocol.KDF-module.html*](https://www.dlitz.net/software/pycrypto/api/current/Crypto.Protocol.KDF-module.html)
 
--Example Vectors. [*http://www.di-mgt.com.au/cryptoKDFs.html\#examplespbkdf*](http://www.di-mgt.com.au/cryptoKDFs.html\#examplespbkdf) - Vectores de
+- Example Vectors. [*http://www.di-mgt.com.au/cryptoKDFs.html\#examplespbkdf*](http://www.di-mgt.com.au/cryptoKDFs.html\#examplespbkdf) - Vectores de
 ejemplo
 
 - PBKDF1 on RFC 2898 (Specification of PKCS \#5 v2.0.)[*https://tools.ietf.org/html/rfc2898\#section-5.1*](https://tools.ietf.org/html/rfc2898\#section-5.1) 
