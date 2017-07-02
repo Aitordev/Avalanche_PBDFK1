@@ -1,138 +1,87 @@
-# Avalanche_PBDFK1
-Avalanche effect analysis on PBKDF1 algorithm
+# Avalanche_PBKDF1
+Avalanche effect analysis on PBKDF1 algorithm with Python and Matlab
 
-Para realizar estas pruebas he usado una función de derivamiento de
-clave conocida como PBKDF1, Los parámetros de la función son una función
-hash, un password, un salt, un contador de iteraciones y el tamaño de la
-clave ya derivada. Esta función se basa en en calcular el hash del
-password concatenado con el salt, y después calcular el hash del hash
-que habíamos calculado, tantas veces como estipule el contador de
-iteraciones:
+# Analysis
+To perform these tests I have used a key derivation function with a sliding computational cost, aimed to reduce the vulnerability of encrypted keys to brute force attacks, known as PBKDF1. The function parameters are a function
+Hash, a password, a salt, an iteration counter and the size of the
+key already derived. This function is based on calculating the hash of the
+password concatenated with the salt, and then calculate the hash of the hash
+which it had been calculated, as many times as the iteration counter estipulates:
 
-*K*[]{#MathJax-Span-26 .anchor}*=H(H(...H(P||S)…*)[]{#MathJax-Span-27
-.anchor})
+>K=H(H(...H(P||S)...))
 
-La función hash a utilizar, la cual puede ser una MD2, una MD5 o una
-SHA-1, repercutirá en el tamaño de salida del algoritmo siendo de 16
-octetos para MD2 y MD5, y de 20 para SHA-1. Las pruebas usaran el hash
-SHA-1 ya que la salida es de mayor tamaño y es la opción por defecto del
-algoritmo.
+The hash function to use, which can be an MD2, an MD5 or a
+SHA-1, affect the size of the output of the algorithm in 16
+Octets for MD2 and MD5, and 20 for SHA-1. The tests that use the hash
+SHA-1 since the output is larger and is the default option of the
+algorithm.
 
-El resto de parámetros que se mantendrán en todas las pruebas, sera el
-valor del contador de iteraciones a 1000, recomendado así por la
-documentación del algoritmo y opción por defecto.
+The rest of the parameters that are maintained in all the tests, will be the
+iterations counter value to 1000, recommended by the
+Documentation of the algorithm and default option.
 
-Para realizar este ejercicio el lenguaje de programación elegido a sido
-Python y la funcion ha sido obtenida gracias al paquete pyCrypto de
-Python, y podemos ver en el archivo 'test\_KDF.py' como soluciona la
-función correctamente el vector de prueba, este ejecutable para probar
-los vectores pertenece a la API pyCrypto de Python.
+The programming language chosen is Python and the function has been obtained thanks to the pyCrypto package. We can see in the file 'test\KDF.py' as it solves the
+test vector correctly.
 
-Los datos de la primera prueba, ejecutados en el archivo 'PB.py', serán
-una password fija y aleatoria de tamaño 4 Bytes y lo que ira variando
-sera el salt aleatorio y diferente en cada una de las iteraciones del
-bucle de la prueba y de tamaño 8 Bytes, al cual variamos un bit y
-calculamos la distancia de Hamming entre las claves derivadas
-resultantes y volcamos el resultado en el archivo 'hamming'.
+The data of the first test (PB.py), a fixed and random password of 4 bytes size and what it varies is the random and different salt of 8 bytes size with one bit changed in each one of the iterations of the test loop. Calculate the Hamming distance between the derived keys and dump the result in the file 'hamming'.
 
-Para la segunda prueba, ejecutada en 'PBv2.py', será una password
-aleatoria, la que ira variando y mantendremos el salt fijo y aleatorio
-manteniendo los tamaños de la prueba anterior y calculando la distancia
-de Hamming volcando el resultado sobre el archivo 'hammingv2'.
+For the second test (PBv2.py) a random password, which variates and keep the salt. Maintaining the same sizes of the previous test and calculating the Hamming distance overturning the result on the file 'hammingv2'.
 
-En la tercera usamos la misma estructura que en la primera, pero como
-password usamos el string 'password' para poder comprobar como repercute
-el que el password a cifrar sea aleatorio o no, esta prueba se realiza
-con 'PBv3.py' y se vuelcan los datos en 'hammingv3'.
+In the third test. It maintains the same structure as the first, but as password is used the string 'password' to be able to check how it affects whether the password to be encrypted is random or not. This test (PBv3.py) returns the data in 'hammingv3'.
 
-Todas estas pruebas las enfrentaremos al calculo de las distancias de
-Hamming de funciones pseudoaleatorias, generado en el archivo 'ran.py' y
-volcado en 'ran'.
+All tests of the charts in the calculation of  HAmming distances of pseudo-random functions, generated in the file 'ran.py' and Dump in 'ran'.
 
-El tamaño de las muestras serán de 10⁶ para cubrir una pequeña parte de
-todas las posibles y tener suficientes datos para que sean de fiar.
+The sample size is 10, which cover a small part of the whole possible, and have enough data to be reliable.
 
-Sobre las medidas estadísticas a calcular cabe destacar:
+The statistical measures to be calculated include:
 
-[]{#result_box .anchor}El valor de Skewness que mide la asimetría de la
-distribución. El valor de la asimetría puede ser positivo o negativo, o
-incluso indefinida. Para un valor cercano a cero es el caso de una
-distribución simétrica.
+The Skewness value that measures the asymmetry of the distribution. The value of the asymmetry can be positive or negative, or even indefinite. For a value close to zero is the case of a symmetric distribution.
 
-La Kurtosis es un descriptor de la forma de una distribución de
-probabilidad, y la Kurtosis de cualquier distribución normal univariante
-es 3.
+Kurtosis is a descriptor of the shape of a distribution of probability, and the kurtosis of any normal univariate distribution is 3.
 
-Hay que usar la prueba χ² de Pearson que mide la discrepancia entre una
-distribución observada y otra teórica, indicando en qué medida las
-diferencias existentes entre ambas, y probar la independencia entre las
-dos variables.
+The Pearson χ² test is used to measure the discrepancy between an observed distribution and a theoretical distribution, indicating the extent to which the differences exist between the two, and to test for independence between the two variables.
 
-![](media/image1.png){width="2.3826388888888888in"
-height="0.4486111111111111in"}
+The higher the chi square value, the lower the probability that the hypothesis is correct.
 
-Cuanto mayor sea el valor de chi cuadrado, menos verosímil es que la
-hipótesis sea correcta.
+Statistical measures and histograms obtained with Matlab and available in 'crypto.m', 'cryptov2.m', 'cryptov3.m'.
 
-![](media/image2.jpeg){width="6.6930555555555555in"
-height="1.3611111111111112in"}
+|                         | **PBDKF1 Test1** | **PBDKF1 Test2** | **PBDKF1 Test3** | **Ramdon Func.** |
+| :---------------------- | ---------------: | ---------------: | ---------------: | ---------------: |
+| **Media**               | 80.0080          | 79.9939          | 80.0034          | 80.0002          |
+| **Mediana**             | 80               | 80               | 80               | 80               |
+| **Moda**                | 80               | 80               | 80               | 80               |
+| **Varianza**            | 40.0587          | 40.0855          | 39.9810          | 40.0535          |
+| **Desviacion Estandar** | 6.3292           | 6.3313           | 6.3231           | 6.3288           |
+| **Error Estandar**      | 0.0063           | 0.0063           | 0.0063           | 0.0063           |
+| **Skewness**            | -7.2674e-04      | 0.0012           | -0.0048          | 0.0030           |
+| **Kurtosis**            | 2.9872           | 2.9869           | 2.9864           | 2.9896           |
+| **Rango**               | 59               | 58               | 66               | 59               |
+| **Maximo**              | 111              | 109              | 114              | 110              |     
+| **Minimo**              | 52               | 51               | 51               | 51               |
+| **Sum**                 | 80007962         | 79993924         | 80003366         | 80000159         |
+| **Chi Cuadrado**        | 0.3334           | 0.3335           | 0.3333            
+ 
 
-Adjunto las imágenes con mayor resolución como anexo: 'hist.jpg',
-'histv2.jpg' e 'histv3.jpg'
+As we can see once obtained all the data we have distributions symmetrical, normal and univariate in all cases.
 
-Medidas estadísticas e histogramas obtenidos con Matlab y disponibles en
-'crypto.m', 'cryptov2.m', 'cryptov3.m'.
+In the histograms the difference between the algorithm and a random function is minimal and with chi square results we can certify that the three tests do not differ from a uniform and random distribution with a degree of significance of 0.5%.
 
-  ------------------------- ----------------- ----------------- ----------------- ------------------
-                            **PBDKF1 P. 1**   **PBDKF1 P. 2**   **PBDKF1 P. 3**   **F. Aleatoria**
-  **Media**                 80.0080           79.9939           80.0034           80.0002
-  **Mediana**               80                80                80                80
-  **Moda**                  80                80                80                80
-  **Varianza**              40.0587           40.0855           39.9810           40.0535
-  **Desviacion Estandar**   6.3292            6.3313            6.3231            6.3288
-  **Error Estandar**        0.0063            0.0063            0.0063            0.0063
-  **Skewness**              -7.2674e-04       0.0012            -0.0048           0.0030
-  **Kurtosis**              2.9872            2.9869            2.9864            2.9896
-  **Rango**                 59                58                66                59
-  **Maximo**                111               109               114               110
-  **Minimo**                52                51                51                51
-  **Sum**                   80007962          79993924          80003366          80000159
-  **Chi Cuadrado**          0.3334            0.3335            0.3333            
-  ------------------------- ----------------- ----------------- ----------------- ------------------
+#References
 
-Como podemos ver una vez obtenidos todos los datos tenemos
-distribuciones simétricas, normales y univariantes en todos los casos.
+- Cryptographic API. [*https://www.dlitz.net/software/pycrypto/*](https://www.dlitz.net/software/pycrypto/)
 
-En los histogramas la diferencia entre el algoritmo y una función
-aleatoria es mínima y con los resultados de chi cuadrado podemos
-certificar que las tres pruebas no se diferencian de una distribución
-uniforme y aleatoria con un grado de significación del 0,5%.
-
-Referencias
-
-[*https://www.dlitz.net/software/pycrypto/*](https://www.dlitz.net/software/pycrypto/)
-- Api criptográfica usada.
-
+- Documentation of the algorithm and its parameters within the Api. 
 [*https://www.dlitz.net/software/pycrypto/api/current/Crypto.Protocol.KDF-module.html*](https://www.dlitz.net/software/pycrypto/api/current/Crypto.Protocol.KDF-module.html)
-- Documentación del algoritmo y sus parámetros dentro de la Api.
 
-*http://www.di-mgt.com.au/cryptoKDFs.html\#examplespbkdf* - Vectores de
+-Example Vectors. [*http://www.di-mgt.com.au/cryptoKDFs.html\#examplespbkdf*](http://www.di-mgt.com.au/cryptoKDFs.html\#examplespbkdf) - Vectores de
 ejemplo
 
-*https://tools.ietf.org/html/rfc2898\#section-5.1* - PBKDF1 en el RFC
-2898 (Specification of PKCS \#5 v2.0.)
+- PBKDF1 on RFC 2898 (Specification of PKCS \#5 v2.0.)[*https://tools.ietf.org/html/rfc2898\#section-5.1*](https://tools.ietf.org/html/rfc2898\#section-5.1) 
 
-[*https://en.wikipedia.org/wiki/Skewness*](https://en.wikipedia.org/wiki/Skewness)
-- Skewness
+- Skewness [*https://en.wikipedia.org/wiki/Skewness*](https://en.wikipedia.org/wiki/Skewness)
 
-[*https://en.wikipedia.org/wiki/Kurtosis*](https://en.wikipedia.org/wiki/Kurtosis)
-- Kurtosis
+- Kurtosis [*https://en.wikipedia.org/wiki/Kurtosis*](https://en.wikipedia.org/wiki/Kurtosis)
 
-[*https://es.wikipedia.org/wiki/Prueba\_%CF%87%C2%B2\_de\_Pearson*](https://es.wikipedia.org/wiki/Prueba_χ²_de_Pearson)
-- Chi cuadrado
+- χ² [*https://es.wikipedia.org/wiki/Prueba\_%CF%87%C2%B2\_de\_Pearson*](https://es.wikipedia.org/wiki/Prueba_χ²_de_Pearson)
 
-[*https://es.wikipedia.org/wiki/Significaci%C3%B3n\_estad%C3%ADstica*](https://es.wikipedia.org/wiki/Significación_estadística)
-- Significación estadística para chi Cuadrado
-
-[https://www.tackoverflow.com](https://www.tackoverflow.com/) - Dudas y
-errores de programación
+- Statistical significance for χ² [*https://es.wikipedia.org/wiki/Significaci%C3%B3n\_estad%C3%ADstica*](https://es.wikipedia.org/wiki/Significación_estadística)
